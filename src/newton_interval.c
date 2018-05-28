@@ -13,8 +13,8 @@ union f64ud {
     double d;
 };
 
-static inline newton_interval_isnan(double d){
-    untion f64ud u;
+static inline int newton_interval_isnan(double d){
+    union f64ud u;
     u.d = d;
     return ((u.u != 0) + (0x7fffffff & (u.u >> 32))) > 0x7f00000;
 }
