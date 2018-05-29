@@ -40,5 +40,8 @@ static const TestCase t4 = {test4, "test4"};
 static const TestCase* test_cases[NTESTS] = {&t1, &t2, &t3, &t4};
 
 int main(int argc, char ** argv){
-  return run_tests(NTESTS, test_cases, argv[0]);
+    if (argc != 1){
+        return 1;
+    }
+    return run_tests(NTESTS, test_cases, argv[0]);
 }

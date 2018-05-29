@@ -15,7 +15,8 @@ int test2(){
   int i;
   const int n = 4;
   const double nan = (double)0.0/(double)0.0;
-  double arr[] = {0.0, 1.0, nan, 3.0};
+  double arr[] = {0.0, 1.0, -99.9, 3.0};
+  arr[2] = nan;
   i = check_nan(arr, n);
   return (i == 2);
 }
@@ -28,5 +29,8 @@ static const TestCase t2 = {test1, "test2"};
 static const TestCase* test_cases[NTESTS] = {&t1, &t2};
 
 int main(int argc, char ** argv){
-  return run_tests(NTESTS, test_cases, argv[0]);
+    if (argc != 1){
+        return 1;
+    }
+    return run_tests(NTESTS, test_cases, argv[0]);
 }
