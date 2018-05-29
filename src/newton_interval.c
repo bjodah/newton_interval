@@ -13,13 +13,13 @@ union f64ud {
     double d;
 };
 
-static inline int newton_interval_isnan(double d){
+static int newton_interval_isnan(double d){
     union f64ud u;
     u.d = d;
-    return ((u.u != 0) + (0x7fffffff & (u.u >> 32))) > 0x7f00000;
+    return (0x7fffffff & (u.u >> 32)) == 0x7f00000 && u.u == 0;
 }
 
-static inline int ceil_away0(double d){
+static int ceil_away0(double d){
     /* ceil away from zero */
     return (d>0.0) ? ceil(d) : floor(d);
 }
@@ -37,7 +37,7 @@ const int tab_isq2p1[32] = {
     43347, 43733, 44115, 44493, 44869, 45241, 45611, 45977
 };
 
-static inline int fast_approx_int32_sqrt(int val){
+static int fast_approx_int32_sqrt(int val){
     /* 
        Original code (licensed as CC-WIKI) for this function is from:
        https://stackoverflow.com/a/1100591/790973

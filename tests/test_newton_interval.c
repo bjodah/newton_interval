@@ -39,15 +39,16 @@ int test4(){
   return (i == -1);
 }
 
+#define NT 50
 int test5(){
-  const int nt = 50;
-  double t[nt];
+  const int nt = NT;
+  double t[NT];
   double treq = 10.0;
   int j;
-  for(j = 0; j<nt; ++j)
-    t[j] = j*treq/(nt-1);
   int i = -2;
   int ti = nt-2;
+  for(j = 0; j<nt; ++j)
+    t[j] = j*treq/(nt-1);
   i=get_interval_from_guess(t, nt, treq, ti);
   return (i==49);
 }
@@ -61,5 +62,8 @@ static const TestCase t5 = {test5, "test5"};
 static const TestCase* test_cases[NTESTS] = {&t1, &t2, &t3, &t4, &t5};
 
 int main(int argc, char ** argv){
-  return run_tests(NTESTS, test_cases, argv[0]);
+    if (argc != 1){
+        return 1;
+    }
+    return run_tests(NTESTS, test_cases, argv[0]);
 }
