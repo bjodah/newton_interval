@@ -79,10 +79,6 @@ int get_interval_from_guess(const double * const arr, const int N,
     t:   value for which j is sought: arr[j] < t <= arr[j+1]
     i:   intial guess of j
 
-
-    Notes
-    -----
-    sqrt is defined in math.h (link with -lm)
     */
 
     /* Delta i for estimated derivative */
@@ -134,7 +130,7 @@ int get_interval_from_guess(const double * const arr, const int N,
         dtdi = (arr[i+h] - arr[i]) / h;
         di = ceil_away0((t - arr[i]) / dtdi);
         /* Check we're not out of explored boundaries; */
-        while (((i + di) >= upper_bound) || ((i + di) <= lower_bound)){
+        while (((i + di) >= upper_bound - 1) || ((i + di) <= lower_bound)){
             di /= 2;
             if (di == 0)
                 di = (upper_bound - lower_bound)-i;
