@@ -1,6 +1,9 @@
 #ifndef NEWTON_INTERVAL_H_YWPLDB3R6RBUPMBHCYMZAZZUCY
 #define NEWTON_INTERVAL_H_YWPLDB3R6RBUPMBHCYMZAZZUCY
 
+#define NEWTON_INTERVAL_MIN(x, y) (((x) < (y)) ? (x) : (y))
+#define NEWTON_INTERVAL_MAX(x, y) (((x) > (y)) ? (x) : (y))
+
 #ifdef __cplusplus
 extern "C" {
 #endif

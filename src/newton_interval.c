@@ -2,14 +2,14 @@
 #include "newton_interval.h"
 
 #ifdef _MSVC
-#define NEWTON_UINT64 unsigned long long
+#define NEWTON_INTERVAL_UINT64 unsigned long long
 #else
 #include <stdint.h>
-#define NEWTON_UINT64 uint64_t
+#define NEWTON_INTERVAL_UINT64 uint64_t
 #endif
 
 union f64ud {
-    NEWTON_UINT64 u;
+    NEWTON_INTERVAL_UINT64 u;
     double d;
 };
 
@@ -82,20 +82,21 @@ int get_interval_from_guess(const double * const arr, const int N,
     */
 
     /* Delta i for estimated derivative */
-    int sqrt_nt = fast_approx_int32_sqrt(N)+1; 
-    int h; /* step in num der */
+    int h = fast_approx_int32_sqrt(N)+1; /* step in num der */
+    int dir;
     int di; /* Delta i (update step in root finding) */
     double dtdi;
     int lower_bound = -1; /* excluded */
     int upper_bound = N; /* excluded */
     int gteq_ti;    /* t >= t[i] */
     int lt_tip1;    /* t < t[i+1] */
-    int eq_tip1;    /* t == t[i+1] */
 
-    if (N <= 2)
-        return 0;
     if (t < arr[0])
         return -1;
+    if (t >= arr[N-1])
+        return N-1;
+    if (N <= 0)
+        return 0;
 
     /* 0 i <= N - 2 */
     if (i > N - 2){
@@ -106,53 +107,44 @@ int get_interval_from_guess(const double * const arr, const int N,
 
     gteq_ti = (t >= arr[i]);
     lt_tip1 = (t < arr[i + 1]);
-    eq_tip1 = (t == arr[i + 1]);
 
-    if (eq_tip1) { /* Unlikekly for floating point numbers */
-        return i + 1;
+    if (gteq_ti){
+        dir = 1;
+    }else{
+        dir = -1;
     }
 
-    while (!(gteq_ti & lt_tip1)){
-        if (gteq_ti){
-            h = sqrt_nt;
-        }else{
-            h = -sqrt_nt;
-        }
 
+    while (!(gteq_ti & lt_tip1)){
         /* Check we're not out of explored boundaries */
-        while (((i + h) >= upper_bound) || ((i + h) <= lower_bound)){
+        while (((i + dir*h) >= upper_bound) || ((i + dir*h) <= lower_bound)){
             h /= 2;
             if (h == 0){
-                h = (upper_bound - lower_bound)-i;
+                h = 1;
                 break;
             }
         }
-        dtdi = (arr[i+h] - arr[i]) / h;
+        dtdi = (arr[i + dir*h] - arr[i]) / (dir*h);
         di = ceil_away0((t - arr[i]) / dtdi);
-        /* Check we're not out of explored boundaries; */
-        while (((i + di) >= upper_bound - 1) || ((i + di) <= lower_bound)){
-            di /= 2;
-            if (di == 0)
-                di = (upper_bound - lower_bound)-i;
-        }
-        /* Update i */
-        i += di;
-        /* Update loop conditions; */
+        i = NEWTON_INTERVAL_MIN(N - 2, NEWTON_INTERVAL_MIN(upper_bound - 1, NEWTON_INTERVAL_MAX(lower_bound + 1, i + di)));
+
+        /* Update loop conditions */
         gteq_ti = (t >= arr[i]);
         lt_tip1 = (t < arr[i + 1]);
-        eq_tip1 = (t == arr[i + 1]);
-        if (eq_tip1) {
-            return i + 1;
+
+        /* Update direction */
+        if (gteq_ti){
+            dir = 1;
+        }else{
+            dir = -1;
         }
+
         /* Update lower and upper boundaries; */
-        if ((gteq_ti) && (i > lower_bound)) {
+        if (gteq_ti) {
             lower_bound = i;
         }
-        if ((lt_tip1) && (i < upper_bound)) {
+        if (lt_tip1) {
             upper_bound = i;
-        }
-        if ((i == lower_bound) && (i+1 == upper_bound)) {
-            return i;
         }
     }
     return i;
