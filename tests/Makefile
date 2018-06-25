@@ -8,7 +8,7 @@ UNIT_SRCS=unittest.c unittest.h
 .PHONY: tests
 
 tests: test_newton_interval test_check_nan test_check_strict_monotonicity
-	@./test_newton_interval
+	@bash -c "timeout 5 ./test_newton_interval";
 	@./test_check_nan
 	@./test_check_strict_monotonicity
 
