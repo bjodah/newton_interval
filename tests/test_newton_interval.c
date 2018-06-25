@@ -53,13 +53,22 @@ int test5(){
   return (i==49);
 }
 
-#define NTESTS 5
+int test6(){
+    int i;
+    const int N = 3;
+    double x[3] = {0.0, 1.0, 2.0};
+    i = get_interval_from_guess(x, N, 1.25, 0);
+    return (i==1);
+}
+
+#define NTESTS 6
 static const TestCase t1 = {test1, "test1"};
 static const TestCase t2 = {test2, "test2"};
 static const TestCase t3 = {test3, "test3"};
 static const TestCase t4 = {test4, "test4"};
 static const TestCase t5 = {test5, "test5"};
-static const TestCase* test_cases[NTESTS] = {&t1, &t2, &t3, &t4, &t5};
+static const TestCase t6 = {test6, "test6"};
+static const TestCase* test_cases[NTESTS] = {&t1, &t2, &t3, &t4, &t5, &t6};
 
 int main(int argc, char ** argv){
     if (argc != 1){
