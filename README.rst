@@ -1,4 +1,3 @@
-===============
 newton_interval
 ===============
 .. image:: https://travis-ci.org/bjodah/newton_interval.png?branch=master
@@ -19,7 +18,8 @@ Change into ``tests/`` and run ``make``
 
 Versions (tagged)
 =================
-* 0.1 - Current stable, no known bugs
+* v0.2 - Current stable, no known bugs
+* v0.1 - Can possibly get stuck in infinite loop.
 
 License
 =======
@@ -28,4 +28,6 @@ Open Source. Released under the very permissive "simplified
 
 Author
 ======
-Björn Dahlgren, contact (gmail adress): bjodah
+Björn Dahlgren, contact:
+* gmail: bjodah
+* kth.se: bda
