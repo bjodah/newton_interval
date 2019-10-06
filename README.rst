@@ -28,6 +28,5 @@ Open Source. Released under the very permissive "simplified
 
 Author
 ======
-Björn Dahlgren, contact:
-* gmail: bjodah
-* kth.se: bda
+Björn Dahlgren, contact (email):
+* gmail.com address: bjodah
