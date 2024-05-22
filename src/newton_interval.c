@@ -16,7 +16,7 @@ union f64ud {
 static int newton_interval_isnan(double d){
     union f64ud u;
     u.d = d;
-    return (0x7fffffff & (u.u >> 32)) == 0x7f00000 && u.u == 0;
+    return ((0x7fffffff & (unsigned)(u.u >> 32)) == 0x7f00000) && ((unsigned)u.u == 0);
 }
 
 static int ceil_away0(double d){
