@@ -10,4 +10,4 @@ steps:
     - (cd tests/; make -B EXTRA_COMPILE_ARGS="-DNDEBUG -O3")
     - (cd tests/; make -B CC=clang EXTRA_COMPILE_ARGS="-fsanitize=address -O0 -g")
     - (cd tests/; make -B CC=clang EXTRA_COMPILE_ARGS="-fsanitize=undefined -O0 -g")
-    - if grep "DO-NOT-MERGE!" -R . --exclude ".drone.yml"; then exit 1; fi
+    - if grep "DO-NOT-MERGE!" -R . --exclude ".woodpecker.yaml"; then exit 1; fi
