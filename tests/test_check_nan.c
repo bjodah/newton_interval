@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-int test1(){
+int test1(void){
   int i;
   const int n = 4;
   double arr[] = {0.0, 1.0, 2.0, 3.0};
@@ -11,7 +11,7 @@ int test1(){
   return (i == -1);
 }
 
-int test2(){
+int test2(void){
   int i;
   const int n = 4;
   const double nan = (double)0.0/(double)0.0;
