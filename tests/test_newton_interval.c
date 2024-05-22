@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-int test1(){
+int test1(void){
   const int nt = 4;
   double t[] = {0.0,1.0,2.0,3.0};
   double treq = 0.5;
@@ -13,7 +13,7 @@ int test1(){
   return (i == 0);
 }
 
-int test2(){
+int test2(void){
   const int nt = 2;
   double t[] = {0.0,1.0};
   double treq = 0.5;
@@ -22,7 +22,7 @@ int test2(){
   return (i == 0);
 }
 
-int test3(){
+int test3(void){
   const int nt = 3;
   double t[] = {0.0,1.0,2.0};
   double treq = 0.9;
@@ -31,7 +31,7 @@ int test3(){
   return (i == 0);
 }
 
-int test4(){
+int test4(void){
   const int nt = 3;
   double t[] = {0.0,1.0,2.0};
   double treq = -0.9;
@@ -41,7 +41,7 @@ int test4(){
 }
 
 #define NT 50
-int test5(){
+int test5(void){
   const int nt = NT;
   double t[NT];
   double treq = 10.0;
@@ -54,7 +54,7 @@ int test5(){
   return (i==49);
 }
 
-int test6(){
+int test6(void){
     int i;
     const int N = 3;
     double x[3] = {0.0, 1.0, 2.0};
@@ -62,7 +62,7 @@ int test6(){
     return (i==1);
 }
 
-int test7(){
+int test7(void){
   const int nt = NT;
   double t[NT] = {0.013921575895562895, 0.1042735832107497, 0.25215887627910727, 0.31241134057077979, 
   0.41974237995332697, 0.51719529205145565, 0.66303332869309528, 0.76229828678918832, 
