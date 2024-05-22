@@ -1,8 +1,10 @@
 #ifndef _UNITTEST_H_
 #define _UNITTEST_H_
 
+typedef int (*TestFunc)();
+
 typedef struct testcase_t {
-  int (* func)();
+  TestFunc func;
   char* name;
 } TestCase;
 

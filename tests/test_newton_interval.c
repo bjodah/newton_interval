@@ -82,10 +82,6 @@ int test7(){
   return (i==1);
 }
 
-/* int test8(){ */
-/*     return (newton_interval_isnan(0.0/0.0) == 1); */
-/* } */
-
 #define NTESTS 7
 static const TestCase t1 = {test1, "test1"};
 static const TestCase t2 = {test2, "test2"};
@@ -94,8 +90,7 @@ static const TestCase t4 = {test4, "test4"};
 static const TestCase t5 = {test5, "test5"};
 static const TestCase t6 = {test6, "test6"};
 static const TestCase t7 = {test7, "test7"};
-/*static const TestCase t8 = {test8, "test8"};*/
-static const TestCase* test_cases[NTESTS] = {&t1, &t2, &t3, &t4, &t5, &t6, &t7 /*, &t8*/};
+static const TestCase* test_cases[NTESTS] = {&t1, &t2, &t3, &t4, &t5, &t6, &t7};
 
 int main(int argc, char ** argv){
     if (argc != 1){
