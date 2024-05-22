@@ -1,7 +1,7 @@
 #ifndef _UNITTEST_H_
 #define _UNITTEST_H_
 
-typedef int (*TestFunc)();
+typedef int (*TestFunc)(void);
 
 typedef struct testcase_t {
   TestFunc func;
