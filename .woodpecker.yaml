@@ -3,7 +3,7 @@ when:
 
 steps:
  - name: build
-   image: cont-reg.bjodah.se:443/bjodah/triceratops-3:17
+   image: cont-reg.bjodah.se:443/bjodah/triceratops-3:34
    commands:
     # - git fetch -tq  # used by ``git describe``
     - (cd tests/; make -B )
